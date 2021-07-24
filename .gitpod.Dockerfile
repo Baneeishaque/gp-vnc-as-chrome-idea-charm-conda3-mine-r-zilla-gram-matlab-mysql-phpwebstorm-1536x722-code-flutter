@@ -7,7 +7,7 @@ RUN sudo apt update \
      libglu1-mesa \
  && sudo rm -rf /var/lib/apt/lists/*
 
-ARG flutterSdkDownloadUrl="https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_1.22.6-stable.tar.xz"
+ARG flutterSdkDownloadUrl="https://storage.googleapis.com/flutter_infra_release/releases/beta/linux/flutter_linux_1.26.0-17.8.pre-beta.tar.xz"
 
 RUN cd $HOME \
  && wget -qO flutter_sdk.tar.xz $flutterSdkDownloadUrl \
@@ -16,4 +16,5 @@ RUN cd $HOME \
     
 ENV PATH="$PATH:$HOME/flutter/bin"
 
-RUN flutter precache
+RUN flutter config --enable-web \
+ && flutter precache
