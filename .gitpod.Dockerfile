@@ -9,12 +9,12 @@ RUN sudo apt update \
 
 ARG flutterSdkDownloadUrl="https://storage.googleapis.com/flutter_infra_release/releases/beta/linux/flutter_linux_1.26.0-17.8.pre-beta.tar.xz"
 
-RUN cd $HOME \
- && wget -qO flutter_sdk.tar.xz $flutterSdkDownloadUrl \
- && tar -xvf flutter_sdk.tar.xz \
- && rm flutter_sdk.tar.xz
+RUN sudo wget -qO $HOME/flutter_sdk.tar.xz $flutterSdkDownloadUrl \
+ && sudo tar -xvf $HOME/flutter_sdk.tar.xz -C $HOME \
+ && sudo rm $HOME/flutter_sdk.tar.xz
     
 ENV PATH="$PATH:$HOME/flutter/bin"
 
-RUN flutter config --enable-web \
- && flutter precache
+# TODO : Fix permission
+# RUN flutter config --enable-web \
+#  && flutter precache
